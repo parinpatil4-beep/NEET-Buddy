@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>NEET Buddy</title>
+<style>
+:root{--bg:#061326;--panel:#0d2038;--panel2:#102944;--line:#203c5c;--text:#f4f8ff;--muted:#9eb2ca;--green:#39e6a0;--blue:#56a7ff;--purple:#b28aff;--orange:#ffb34f}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#061326,#07182b 60%,#061326);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text);padding:18px 15px 88px}
+header{display:flex;align-items:center;justify-content:space-between;margin:6px 0 20px}.brand{font-weight:900;font-size:23px;letter-spacing:-.8px}.brand span{color:var(--green)}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 10px;color:var(--muted);font-size:12px}
+h1{font-size:26px;line-height:1.15;margin:4px 0 7px}h2{font-size:17px;margin:0 0 12px}p{color:var(--muted);margin:0 0 12px;font-size:13px;line-height:1.5}
+.card{background:linear-gradient(145deg,rgba(16,41,68,.96),rgba(10,29,50,.98));border:1px solid var(--line);border-radius:19px;padding:16px;margin-bottom:13px;box-shadow:0 8px 24px #0002}
+.hero{background:radial-gradient(circle at 95% 0%,#164e54 0,transparent 40%),linear-gradient(135deg,#102d4b,#0b2038)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.small{font-size:12px;color:var(--muted)}.big{font-size:28px;font-weight:850;letter-spacing:-1px}.green{color:var(--green)}.progress{height:8px;border-radius:99px;background:#233b55;overflow:hidden;margin:10px 0}.progress div{height:100%;background:linear-gradient(90deg,#39e6a0,#60d9cf);border-radius:99px;width:0;transition:width .2s}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.subject{padding:12px 10px;border-radius:15px;background:#0a1b30;border:1px solid var(--line)}.subject .emoji{font-size:22px}.subject strong{display:block;font-size:13px;margin:5px 0}.subject span{font-size:12px;color:var(--muted)}
+button{border:0;border-radius:12px;background:var(--green);color:#06231b;font-weight:800;padding:12px 14px;font-size:14px;cursor:pointer}button.secondary{background:#193653;color:var(--text);border:1px solid #2a4969}button.ghost{background:transparent;color:var(--green);border:1px solid #26785e}button:disabled{opacity:.4}
+.task{display:flex;align-items:flex-start;gap:11px;padding:12px 0;border-bottom:1px solid #1c3550}.task:last-child{border-bottom:0}.check{width:23px;height:23px;accent-color:var(--green);margin-top:2px;flex-shrink:0}.tasktitle{font-size:14px;font-weight:700}.taskmeta{font-size:12px;color:var(--muted);margin-top:4px}.badge{font-size:11px;border-radius:99px;padding:4px 8px;background:#173451;color:#c5dbf4;white-space:nowrap}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#061326f2;backdrop-filter:blur(15px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom));z-index:5}.nav button{background:transparent;color:var(--muted);padding:7px 10px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px}.nav button.active{color:var(--green)}.nav .ico{font-size:19px}
+.screen{display:none}.screen.active{display:block}
+.timer{font-size:48px;font-weight:900;text-align:center;margin:14px 0}.timerRing{border:8px solid #164d4c;border-top-color:var(--green);border-radius:50%;width:190px;height:190px;margin:18px auto;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.option{display:block;width:100%;text-align:left;margin:8px 0;background:#102944;color:var(--text);border:1px solid var(--line);font-weight:600}.option.correct{border-color:var(--green);background:#123e38}.option.wrong{border-color:#ff7474;background:#3b202b}
+input[type=text]{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#07182b;color:var(--text);margin:6px 0 12px}
+footer{text-align:center;color:#7188a3;font-size:11px;padding:10px}
+</style>
+</head>
+<body>
+<header><div class="brand">NEET <span>Buddy ✦</span></div><div class="pill">CLASS 11 • QUEST MODE</div></header>
+
+<section id="home" class="screen active">
+  <div class="card hero">
+    <p>YOUR NEXT STEP STARTS HERE</p><h1>Hey, future doctor! 👋</h1>
+    <p>Perfect nahi banna. Bas aaj kal se thoda better banna hai.</p>
+    <div class="row" style="margin-top:16px"><div><div class="small">TODAY'S PROGRESS</div><div class="big"><span id="doneCount">0</span>/<span id="totalCount">4</span></div></div><div style="text-align:right"><div class="small">🔥 CURRENT STREAK</div><div class="big"><span id="streak">0</span> days</div></div></div>
+    <div class="progress"><div id="homeProgress"></div></div><div class="small" id="progressLabel">Let's complete your first challenge.</div>
+  </div>
+  <div class="grid" style="margin-bottom:13px">
+    <div class="subject"><div class="emoji">⚛️</div><strong>Physics</strong><span id="phyCount">0 tasks</span></div>
+    <div class="subject"><div class="emoji">🧪</div><strong>Chemistry</strong><span id="chemCount">0 tasks</span></div>
+    <div class="subject"><div class="emoji">🧬</div><strong>Biology</strong><span id="bioCount">0 tasks</span></div>
+  </div>
+  <div class="card"><div class="row"><h2>Today's challenges</h2><span class="badge" id="todayDate"></span></div><div id="homeTasks"></div><button style="width:100%;margin-top:12px" onclick="showScreen('challenges')">View all challenges →</button></div>
+  <div class="card"><h2>⚡ Tiny tip</h2><p>Phone ko doosre room mein rakh, timer start kar, aur sirf pehla question solve kar. Motivation baad mein aa sakti hai.</p></div>
+</section>
+
+<section id="challenges" class="screen">
+  <h1>Daily Challenges 🎯</h1><p>Chhote, doable steps. Har complete task ko tick kar.</p>
+  <div class="card"><div class="row"><h2>Today's mission</h2><span class="badge">Class 11</span></div><div id="allTasks"></div></div>
+  <div class="card"><h2>Challenge rule</h2><p>Har task complete karne par progress update hoti hai. Honest rehna — tick tabhi karna jab task kiya ho 😄</p><button class="secondary" onclick="resetToday()">Reset today's checklist</button></div>
+</section>
+
+<section id="timerScreen" class="screen">
+  <h1>Focus Timer ⏱️</h1><p>25 minutes focus, then 5 minutes break. Phone ko ulta rakhna ya door rakhna.</p>
+  <div class="card" style="text-align:center">
+    <div class="pill" id="timerMode">FOCUS SESSION</div>
+    <div class="timerRing"><div class="timer" id="timerText">25:00</div><div class="small" id="timerCaption">One thing at a time</div></div>
+    <div class="row"><button class="secondary" onclick="resetTimer()">Reset</button><button id="startPause" onclick="toggleTimer()">Start focus</button><button class="secondary" onclick="switchMode()">Break</button></div>
+    <p style="margin-top:14px">Completed focus sessions: <strong class="green" id="sessions">0</strong></p>
+  </div>
+</section>
+
+<section id="quiz" class="screen">
+  <h1>Quick MCQs 🧠</h1><p>Practice questions for common Class 11 concepts. These are practice questions, not copied official NEET papers.</p>
+  <div class="card"><div class="row"><span class="badge" id="qSubject">PHYSICS</span><span class="small" id="qNumber">Question 1</span></div><h2 id="questionText" style="margin-top:14px">Loading question...</h2><div id="options"></div><p id="feedback" aria-live="polite"></p><div class="row"><span class="small" id="score">Score: 0</span><button id="nextQuestion" onclick="nextQ()" disabled>Next →</button></div></div>
+  <div class="card"><h2>Study tip</h2><p>Galat answer aaye toh explanation padho, phir concept NCERT se revise karo.</p></div>
+</section>
+
+<section id="progress" class="screen">
+  <h1>Your progress 📈</h1><p>Small steps count. Track your work, not your worth.</p>
+  <div class="card"><div class="row"><div><div class="small">TASKS COMPLETED</div><div class="big" id="allDone">0</div></div><div><div class="small">FOCUS SESSIONS</div><div class="big" id="allSessions">0</div></div><div><div class="small">MCQ SCORE</div><div class="big" id="allScore">0</div></div></div></div>
+  <div class="card"><h2>Subject progress</h2><p>Today's completed tasks by subject.</p><div id="subjectProgress"></div></div>
+  <div class="card"><h2>Streak</h2><p id="streakText">Complete at least one daily challenge to start your streak.</p><button class="secondary" onclick="showScreen('challenges')">Back to challenges</button></div>
+  <footer>Your progress is stored locally on this device.</footer>
+</section>
+
+<nav class="nav">
+<button class="active" data-screen="home" onclick="showScreen('home')"><span class="ico">⌂</span>Home</button>
+<button data-screen="challenges" onclick="showScreen('challenges')"><span class="ico">☑</span>Challenges</button>
+<button data-screen="timerScreen" onclick="showScreen('timerScreen')"><span class="ico">◷</span>Timer</button>
+<button data-screen="quiz" onclick="showScreen('quiz')"><span class="ico">✦</span>MCQs</button>
+<button data-screen="progress" onclick="showScreen('progress')"><span class="ico">▥</span>Progress</button>
+</nav>
+<script>
+const todayKey=()=>new Date().toISOString().slice(0,10);
+const dateLabel=()=>new Date().toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'});
+const defaultTasks=[
+ {id:'p1',subject:'Physics',emoji:'⚛️',title:'Revise units and dimensions',detail:'Read your notes for 15 minutes and write 3 key points.'},
+ {id:'c1',subject:'Chemistry',emoji:'🧪',title:'Chemical bonding: one concept',detail:'Revise one concept or make a short summary.'},
+ {id:'b1',subject:'Biology',emoji:'🧬',title:'NCERT Biology reading',detail:'Read 2–3 pages actively and underline key terms.'},
+ {id:'m1',subject:'Mixed',emoji:'🎯',title:'Attempt 5 practice MCQs',detail:'Try without notes, then review mistakes.'}
+];
+let store={};try{store=JSON.parse(localStorage.getItem('neetBuddyData')||'{}')}catch(e){}
+function save(){localStorage.setItem('neetBuddyData',JSON.stringify(store))}
+function ensureDay(){let k=todayKey();if(!store.days)store.days={};if(!store.days[k])store.days[k]={completed:[],sessions:0,quizCorrect:0,quizAttempted:0};if(!store.lastDate)store.lastDate='';if(typeof store.streak!=='number')store.streak=0;return store.days[k]}
+let day=ensureDay();
+function completedCount(){return day.completed.length}
+function taskHTML(t){return `<div class="task"><input class="check" type="checkbox" ${day.completed.includes(t.id)?'checked':''} onchange="toggleTask('${t.id}')"><div style="flex:1"><div class="tasktitle">${t.emoji} ${t.title}</div><div class="taskmeta">${t.subject} • ${t.detail}</div></div><span class="badge">${day.completed.includes(t.id)?'Done':'Task'}</span></div>`}
+function renderTasks(){day=ensureDay();document.getElementById('homeTasks').innerHTML=defaultTasks.slice(0,3).map(taskHTML).join('');document.getElementById('allTasks').innerHTML=defaultTasks.map(taskHTML).join('');let n=completedCount();document.getElementById('doneCount').textContent=n;document.getElementById('totalCount').textContent=defaultTasks.length;document.getElementById('homeProgress').style.width=(n/defaultTasks.length*100)+'%';document.getElementById('progressLabel').textContent=n===defaultTasks.length?'All challenges completed. Amazing work!':'Keep going — one task at a time.';document.getElementById('phyCount').textContent=(day.completed.includes('p1')?'1':'0')+' task';document.getElementById('chemCount').textContent=(day.completed.includes('c1')?'1':'0')+' task';document.getElementById('bioCount').textContent=(day.completed.includes('b1')?'1':'0')+' task';document.getElementById('streak').textContent=store.streak||0;document.getElementById('todayDate').textContent=dateLabel();renderProgress()}
+function toggleTask(id){day=ensureDay();if(day.completed.includes(id))day.completed=day.completed.filter(x=>x!==id);else day.completed.push(id);if(day.completed.length>0&&store.lastDate!==todayKey()){let yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);let y=yesterday.toISOString().slice(0,10);store.streak=(store.lastDate===y?(store.streak||0)+1:1);store.lastDate=todayKey()}save();renderTasks()}
+function resetToday(){if(confirm("Reset today's checklist?")){day.completed=[];save();renderTasks()}}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='progress')renderProgress();if(id==='challenges')renderTasks()}
+let mode='focus',remaining=1500,running=false,interval=null;
+function updateTimer(){let m=Math.floor(remaining/60),s=remaining%60;document.getElementById('timerText').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');document.getElementById('timerMode').textContent=mode==='focus'?'FOCUS SESSION':'SHORT BREAK';document.getElementById('timerCaption').textContent=mode==='focus'?'One thing at a time':'Rest your eyes';document.getElementById('startPause').textContent=running?'Pause':(remaining===0?'Start again':'Start '+(mode==='focus'?'focus':'break'))}
+function toggleTimer(){if(running){clearInterval(interval);running=false;updateTimer();return}if(remaining<=0)remaining=mode==='focus'?1500:300;running=true;updateTimer();interval=setInterval(()=>{remaining--;if(remaining<=0){clearInterval(interval);running=false;remaining=0;if(mode==='focus'){day=ensureDay();day.sessions++;save();renderProgress()}if(navigator.vibrate)navigator.vibrate([150,80,150]);alert(mode==='focus'?'Focus session complete! Take a short break.':'Break over — ready for another focus session?')}updateTimer()},1000)}
+function resetTimer(){clearInterval(interval);running=false;remaining=mode==='focus'?1500:300;updateTimer()}
+function switchMode(){clearInterval(interval);running=false;mode=mode==='focus'?'break':'focus';remaining=mode==='focus'?1500:300;updateTimer()}
+const questions=[
+ {s:'PHYSICS',q:'The dimensional formula of force is:',o:['[MLT⁻¹]','[MLT⁻²]','[ML²T⁻²]','[M⁰LT⁻²]'],a:1,e:'Force = mass × acceleration, so its dimensions are [M][LT⁻²] = [MLT⁻²].'},
+ {s:'CHEMISTRY',q:'Which type of bond forms by sharing electron pairs?',o:['Ionic bond','Covalent bond','Metallic bond','Hydrogen bond'],a:1,e:'A covalent bond forms when atoms share one or more pairs of electrons.'},
+ {s:'BIOLOGY',q:'The basic structural and functional unit of life is the:',o:['Tissue','Organ','Cell','Organ system'],a:2,e:'The cell is the basic structural and functional unit of living organisms.'},
+ {s:'PHYSICS',q:'The SI unit of work is:',o:['Watt','Newton','Joule','Pascal'],a:2,e:'Work is measured in joules (J) in the SI system.'},
+ {s:'CHEMISTRY',q:'The atomic number of an element equals the number of:',o:['Neutrons','Protons','Nucleons','Shells'],a:1,e:'Atomic number is defined as the number of protons in the nucleus.'},
+ {s:'BIOLOGY',q:'Which organelle is commonly called the powerhouse of the cell?',o:['Ribosome','Golgi apparatus','Mitochondrion','Lysosome'],a:2,e:'Mitochondria generate much of the ATP used by the cell.'}
+];
+let qi=0,answered=false,quizScore=0;
+function renderQ(){let q=questions[qi];answered=false;document.getElementById('qSubject').textContent=q.s;document.getElementById('qNumber').textContent=`Question ${qi+1} of ${questions.length}`;document.getElementById('questionText').textContent=q.q;document.getElementById('feedback').textContent='';document.getElementById('nextQuestion').disabled=true;document.getElementById('options').innerHTML=q.o.map((x,i)=>`<button class="option" onclick="answerQ(${i})">${String.fromCharCode(65+i)}. ${x}</button>`).join('');document.getElementById('score').textContent='Session score: '+quizScore}
+function answerQ(i){if(answered)return;answered=true;let q=questions[qi];document.querySelectorAll('.option').forEach((b,j)=>{if(j===q.a)b.classList.add('correct');else if(j===i)b.classList.add('wrong');b.disabled=true});day=ensureDay();day.quizAttempted++;if(i===q.a){quizScore++;day.quizCorrect++}save();document.getElementById('feedback').textContent=(i===q.a?'Correct! 🎉 ':'Not quite. ') + q.e;document.getElementById('nextQuestion').disabled=false;renderProgress()}
+function nextQ(){qi=(qi+1)%questions.length;if(qi===0)quizScore=0;renderQ()}
+function renderProgress(){day=ensureDay();let allDays=Object.values(store.days||{});document.getElementById('allDone').textContent=allDays.reduce((a,d)=>a+(d.completed||[]).length,0);document.getElementById('allSessions').textContent=allDays.reduce((a,d)=>a+(d.sessions||0),0);document.getElementById('allScore').textContent=allDays.reduce((a,d)=>a+(d.quizCorrect||0),0)+' correct';let defs=[['Physics','p1','⚛️'],['Chemistry','c1','🧪'],['Biology','b1','🧬']];document.getElementById('subjectProgress').innerHTML=defs.map(([name,id,emoji])=>`<div style="margin:14px 0"><div class="row"><span>${emoji} ${name}</span><span class="small">${day.completed.includes(id)?'1/1':'0/1'}</span></div><div class="progress"><div style="width:${day.completed.includes(id)?100:0}%"></div></div></div>`).join('');document.getElementById('streakText').textContent='Current streak: '+(store.streak||0)+' day(s). Complete a challenge each day to keep building your habit.';document.getElementById('sessions').textContent=day.sessions||0}
+document.getElementById('todayDate').textContent=dateLabel();renderTasks();renderQ();updateTimer();
+</script>
+</body></html>

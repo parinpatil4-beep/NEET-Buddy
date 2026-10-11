@@ -1,0 +1,22 @@
+BHAI - APK BUILD KARNE KA SABSE SEEDHA AVAILABLE TAREEQA
+
+Main is chat ke runtime mein Android SDK / Gradle installed na hone ki wajah se APK ko yahin compile aur test nahi kar paaya. Isliye main fake APK link nahi de raha.
+
+Is project mein GitHub Actions workflow add kiya hai, jo GitHub ke cloud runner par APK build kar sakta hai.
+
+PHONE SE BUILD:
+1. ZIP extract karna phone par mushkil ho toh computer/Chromebook par extract karna easiest hai.
+2. GitHub.com par sign in/create account.
+3. New repository banao, e.g. neet-buddy. Public ya private tum choose kar sakte ho.
+4. Is ZIP ke andar ke saare files/folders upload karo, including hidden .github folder and .github/workflows/build-apk.yml.
+   NOTE: GitHub website par upload karte waqt hidden .github folder miss na ho. Agar upload UI hidden folder allow na kare, easiest is GitHub Desktop or git upload from a computer.
+5. Repository -> Actions tab -> "Build NEET Buddy APK" workflow -> Run workflow.
+6. Build successful hone par run page ke bottom par Artifacts section mein "NEET-Buddy-debug-apk" download karo.
+7. ZIP artifact extract karo; app-debug.apk file milegi.
+8. APK apne Redmi phone par bhejo aur tap karke install karo. Android agar permission maange, sirf us file manager/browser ko allow karo jisse tum apna APK install kar rahe ho.
+
+IMPORTANT:
+- APK is a debug build for personal testing, not a Play Store release.
+- This workflow builds source code; it does not mean a build has already succeeded.
+- You need internet and a GitHub account for the cloud build.
+- If the build fails, send me the red error text/screenshot and I will help fix it.
